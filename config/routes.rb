@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :pdf do
     collection do
-      get 'convert'
+      post 'convert'
     end
   end
 end

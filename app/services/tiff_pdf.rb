@@ -1,9 +1,10 @@
 require 'combine_pdf'
 require 'rmagick'
 class TiffPdf
-    def initialize
+    def initialize files
         @document_id = 23
         @user_id = 23
+        @test_files = files
     end
 
     def tiffs_to_file(id, file_name, file_list)
@@ -14,7 +15,7 @@ class TiffPdf
 
     def tiffs_to_pdf
         random_id = rand(10 ** 10)
-        file_list = test_files 
+        file_list = @test_files 
         STDERR.puts "Processing Document: #{@document_id} by user #{@user_id}"
         convert_start_time = Time.now
         begin
@@ -23,7 +24,7 @@ class TiffPdf
             else
                 result_name = pdf_convert(file_list)
             end
-        rescue ApiError => ex 
+        rescue IOError => ex 
             STDERR.puts "StandardError Tiff Conversion of #{@document_id} failed with #{ex.message}"
             STDERR.puts "\n!!! Switching to PS method for document #{@document_id}\n\n"
             #TODO: log in db that this documment is bad. We may be able to automatically use the ps methd instead of failing first
@@ -37,9 +38,9 @@ class TiffPdf
         end
         STDERR.puts "Final result file: #{result_name}"
         STDERR.puts "Total Time: #{Time.now - convert_start_time}\n"
-        result = File.read( result_name) #File.expand_path(result_name))
+        # result = File.read( result_name) #File.expand_path(result_name))
         # system "rm " + result_name
-        result
+        result_name
     end
 
 
@@ -62,10 +63,9 @@ class TiffPdf
     end
 
  
-    def test_files()
-        #file_list = ["public/p01.tiff", "public/p02.tiff", "public/p03.tiff"] #"public/sample2.TIF"#"public/sample3.TIF"
-        file_list = ['/home/suleman/Work/Emerssive/hpf_connector_rails/sample1.tiff']
-    end
+    # def test_files()
+    #     #file_list = ["public/p01.tiff", "public/p02.tiff", "public/p03.tiff"] #"public/sample2.TIF"#"public/sample3.TIF"
+    # end
 
     def text_to_pdf(source, destination)
       begin 
@@ -151,7 +151,7 @@ class TiffPdf
                 end
                 res = system cmd + files
                 unless res
-                    raise ApiError, "Merge failed bad tiff"
+                    raise IOError, "Merge failed bad tiff"
                 end
                 STDERR.puts "    Merge results = #{res}"
                 system 'rm ' + files
