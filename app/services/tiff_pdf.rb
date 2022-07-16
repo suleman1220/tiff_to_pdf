@@ -1,5 +1,6 @@
 require 'combine_pdf'
 require 'rmagick'
+
 class TiffPdf
     def initialize files
         @document_id = 23
@@ -124,7 +125,7 @@ class TiffPdf
             result_name = pdf_file_name(10000)
             #
             STDERR.puts "Combine #{ENV['MERGE']}  Result Name = #{result_name}"
-            if ENV['MERGE'] =='COMBINE'
+            if true
                 start_merge = Time.now
                 pdf = CombinePDF.new
                 concat_array.each do |doc|
@@ -140,7 +141,7 @@ class TiffPdf
                 concat_array.each do |d|
                     files += d + " "
                 end
-                system 'rm ' + files     
+                system 'rm ' + files
                 STDERR.puts "  COMBINE Merge Time: #{(Time.now - start_merge) * 1000}ms"
             else
                 start_merge = Time.now

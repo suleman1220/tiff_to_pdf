@@ -15,6 +15,8 @@ gem "combine_pdf"
 gem "prawn"
 gem "ruby-filemagic"
 gem "rmagick"
+gem "down"
+gem "fileutils"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
