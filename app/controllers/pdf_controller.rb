@@ -14,7 +14,7 @@ class PdfController < ApplicationController
 
     if base_path.present? and base_path["Value"].present?
       tiff_files = []
-      params[:tiff_files].each do |tiff_file|
+      params[:files].each do |tiff_file|
         tempfile = Down.download(base_path["Value"] + '/' + tiff_file)
         FileUtils.mv(tempfile.path, Rails.root.join('workdir', tempfile.original_filename))
         tiff_files.push(Rails.root.join('workdir', tempfile.original_filename))
