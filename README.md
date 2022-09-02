@@ -1,25 +1,48 @@
-# README
+# HPF Connector Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Rest API server that expects an array of tiff file names, base path(optional) and form name(optional) and returns the combined pdf of all the tiff files.
 
-Things you may want to cover:
+## Run Server inside Container
 
-* Ruby version
+Go to the project directory
 
-* System dependencies
+```bash
+  cd hpf_connector_rails
+```
 
-* Configuration
+Build docker image
 
-* Database creation
+```bash
+  docker build -t hpf_connector .
+```
 
-* Database initialization
+Start the container using generated image
 
-* How to run the test suite
+```bash
+  docker run -p 3000:3000 hpf_connector
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Make POST request to the endpoint with required payload
+`http://localhost:3000/pdf/convert`
 
-* Deployment instructions
+Payload Example:
 
-* ...
-# hpf_connector_rails
+```
+{
+  form_name: "example form",   <-- Optional
+  files: [
+    "file1.tiff",
+    "file2.tiff",
+    "file3.tiff"
+  ],
+  base_path: "https://base_path.com"   <-- Optional
+}
+```
+
+## Running Tests
+
+To run tests, run the following command
+
+```bash
+  rspec spec/service/tiff_pdf.rb
+```

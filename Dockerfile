@@ -23,4 +23,4 @@ COPY . /hpf_connector
 EXPOSE 3000
 
 # We start rails server
-CMD bundle exec rails s -p 3000 -b '0.0.0.0' -e production
+CMD TIFF_PROCESSOR=pdf bundle exec rails s -p 3000 -b '0.0.0.0' -e production
