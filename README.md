@@ -44,5 +44,5 @@ Payload Example:
 To run tests, run the following command
 
 ```bash
-  rspec spec/service/tiff_pdf.rb
+  rspec spec/services/tiff_pdf.rb
 ```
