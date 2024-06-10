@@ -6,18 +6,18 @@ RUN apt install libgnutls30 -y
 RUN apt install ca-certificates -y
 RUN apt-get install imagemagick libmagickwand-dev ghostscript libtiff-tools libmagic-dev -y
 
-# We specify everything will happen within the /hpf_connector folder inside the container
-WORKDIR /hpf_connector
+# We specify everything will happen within the /tiff_to_pdf folder inside the container
+WORKDIR /tiff_to_pdf
 
-# We copy these files from our current application to the /hpf_connector container
-COPY Gemfile /hpf_connector/Gemfile
-COPY Gemfile.lock /hpf_connector/Gemfile.lock
+# We copy these files from our current application to the /tiff_to_pdf container
+COPY Gemfile /tiff_to_pdf/Gemfile
+COPY Gemfile.lock /tiff_to_pdf/Gemfile.lock
 
 # We install all the dependencies
 RUN gem install bundler && bundle install
 
-# We copy all the files from our current application to the /hpf_connector directory in container
-COPY . /hpf_connector
+# We copy all the files from our current application to the /tiff_to_pdf directory in container
+COPY . /tiff_to_pdf
 
 # We expose the port
 EXPOSE 3000

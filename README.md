@@ -1,4 +1,4 @@
-# HPF Connector Rails
+# TIFF TO PDF Rails
 
 A Rest API server that expects an array of tiff file names, base path(optional) and form name(optional) and returns the combined pdf of all the tiff files.
 
@@ -7,19 +7,19 @@ A Rest API server that expects an array of tiff file names, base path(optional) 
 Go to the project directory
 
 ```bash
-  cd hpf_connector_rails
+  cd tiff_to_pdf
 ```
 
 Build docker image
 
 ```bash
-  docker build -t hpf_connector .
+  docker build -t tiff_to_pdf .
 ```
 
 Start the container using generated image
 
 ```bash
-  docker run -p 3000:3000 hpf_connector
+  docker run -p 3000:3000 tiff_to_pdf
 ```
 
 Make POST request to the endpoint with required payload

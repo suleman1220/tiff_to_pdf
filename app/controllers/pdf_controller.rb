@@ -4,7 +4,7 @@ require "net/http"
 
 class PdfController < ApplicationController
   def convert
-    url = URI.parse('http://docker1.ihids.com:19100/api/rest/v1/config?name=hpf_connector&version=local_test&company=demo')
+    url = URI.parse('<BASE_PATH_URL>')
     req = Net::HTTP::Get.new(url.to_s)
     res = Net::HTTP.start(url.host, url.port) {|http|
       http.request(req)
